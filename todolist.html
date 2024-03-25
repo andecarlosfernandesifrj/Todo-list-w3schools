@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-image: linear-gradient(to right,powderblue, cyan );
+            font-size: large;
+         }
+         .header {
+            margin: 100px auto 20px;
+            background-color: #322a7c;
+            padding: 30px 40px; 
+            color: white;
+            text-align: center;
+            width: 80%;
+        }
+        .header:after {
+             content: "";
+             display: table;
+             clear: both;
+        }
+         .botaoCadastrar{
+            background: #da9a9a;
+            color: #080808;
+            border-radius: 0; 
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 25%;
+            float: left;
+         }
+         .botaoCadastrar:hover{
+            background: rgb(151, 43, 43);
+            color: white;
+         }
+         input{
+            padding: 10px;
+            font-size: 16px;
+            width: 75%;
+            float: left;
+         }
+         ul{
+            padding: 0;
+            margin: 0;
+         }
+         ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            background: #e7a8a8;
+            font-size: 18px;
+            transition: 0.1s;
+
+            /* -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none; 
+             user-select: none; */
+         }
+        ul li:hover {
+            background: #bb37bb;
+        }
+        ul li.checked {
+            background: #c70808;
+            color: #fff;
+            text-decoration: line-through;
+        }
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 12px 16px 12px 16px;
+        }
+
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+    <title>To do List</title>
+</head>
+<body>
+    <div id="div" class="header">
+        <h2>To Do List</h2>
+        <input id="entrada" type="text" placeholder="Tarefa...">
+        <span onclick="cadastrar();" class="botaoCadastrar">Cadastrar</span>
+    </div>
+    <ul id="ul">
+        
+    </ul>
+    <script>
+     var close = document.getElementsByClassName("close");
+     var i;
+     for (i = 0; i < close.length; i++) {
+     close[i].onclick = function() {
+        var div = this.parentElement;
+        div.style.display = "none";
+     }
+     }
+
+      var list = document.querySelector('ul');
+      list.addEventListener('click', function(ev) {
+         if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+        }
+      }, false);
+
+      function cadastrar() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("entrada").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("Digite alguma tarefa...");
+        } else {
+            document.getElementById("ul").appendChild(li);
+        }
+        document.getElementById("entrada").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+            }
+        }
+      }
+    </script>
+</body>
+</html>
